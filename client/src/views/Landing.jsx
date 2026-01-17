@@ -3,9 +3,12 @@ import Header from "../components/Header";
 import React, { useEffect, useState } from "react";
 import { Clock, MapPin, MessageSquare, ChevronDown } from "lucide-react";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
+
 import Map from "../components/Map.jsx"; // Importa el componente del mapa
 
 export const LandingPage = () => {
+  const navigate = useNavigate();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -49,12 +52,13 @@ export const LandingPage = () => {
                 </motion.p>
                 <a href="/login">
                 <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-8 py-4 bg-[#fa7f4b] text-white text-lg font-bold rounded-md hover:text-black hover:bg-[#F2D680]/90 transition-colors shadow-lg uppercase tracking-wide"
-                >
-                  Descubre cómo
-                </motion.button>
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  onClick={() => navigate("/login")}
+  className="px-8 py-4 bg-[#fa7f4b] text-white text-lg font-bold rounded-md hover:text-black hover:bg-[#F2D680]/90 transition-colors shadow-lg uppercase tracking-wide"
+>
+  Descubre cómo
+</motion.button>
                 </a>
               </div>
               <motion.div
