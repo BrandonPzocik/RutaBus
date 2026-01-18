@@ -3,6 +3,8 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { loginUser, registerUser } from "../../services/auth.js";
 import { AuthContext } from "../../context/AuthContext";
+import { useNavigate } from "react-router-dom";
+
 
 export const Login = function Login() {
   const [isLogin, setIsLogin] = useState(true);
@@ -11,6 +13,7 @@ export const Login = function Login() {
   const [nombre, setNombre] = useState("");
   const [FecNac, setFecNac] = useState("");
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
@@ -28,12 +31,15 @@ export const Login = function Login() {
         // Lógica para iniciar sesión
         const data = await loginUser(email, contrasenia);
         console.log("Inicio de sesión exitoso", data);
-
+       
         iniciarSesion(data.token);
+        navigate("/home"); 
       } else {
         // Lógica para registrar usuario
         const data = await registerUser(nombre, email, contrasenia, FecNac);
         console.log("Registro exitoso", data);
+       
+
         navigate("/home");
         // Después de registrar, puedes cambiar al formulario de login o iniciar sesión automáticamente
         setIsLogin(true);
