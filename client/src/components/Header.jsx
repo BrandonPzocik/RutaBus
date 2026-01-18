@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-
+const API_URL = import.meta.env.VITE_API_URL;
 export default function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("");
@@ -12,7 +12,7 @@ export default function Header() {
       setIsLoggedIn(true);
       const getUserData = async () => {
         try {
-          const response = await fetch("http://localhost:3000/validarSesion", {
+          const response = await fetch(`${API_URL}/validarSesion`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",

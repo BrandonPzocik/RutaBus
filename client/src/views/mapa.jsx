@@ -17,7 +17,7 @@ export default function MapComponent() {
   const [recommendedLine, setRecommendedLine] = useState(null);
   const [boardingStop, setBoardingStop] = useState(null);
   const [alightingStop, setAlightingStop] = useState(null);
-
+  const API_URL = import.meta.env.VITE_API_URL;
   useEffect(() => {
     const initialMap = L.map("map").setView([-26.1849, -58.1731], 13);
 
@@ -57,7 +57,7 @@ export default function MapComponent() {
 
   const fetchLinesData = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/lineas");
+      const response = await fetch(`${API_URL}/api/lineas`);
       const data = await response.json();
       return data;
     } catch (error) {

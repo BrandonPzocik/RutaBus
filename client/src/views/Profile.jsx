@@ -7,8 +7,9 @@ import Footer from "../components/Footer";
 // Función para obtener los datos del usuario
 const fetchUserData = async () => {
   const token = localStorage.getItem("token");
+  const API_URL = import.meta.env.VITE_API_URL;
 
-  const response = await fetch("http://localhost:3000/validarSesion", {
+  const response = await fetch(`${API_URL}/validarSesion`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
@@ -37,7 +38,7 @@ const updateUserData = async (userData) => {
   const token = localStorage.getItem("token");
 
   try {
-    const response = await fetch("http://localhost:3000/updateUser", {
+    const response = await fetch(`${API_URL}/updateUser`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

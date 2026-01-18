@@ -21,7 +21,7 @@ export const MapPage = function () {
   const [favorites, setFavorites] = useState({});
   const [activeTab, setActiveTab] = useState("lines");
   const [selectedStops, setSelectedStops] = useState(new Set());
-
+  const API_URL = import.meta.env.VITE_API_URL;
   const customIcon = L.icon({
     iconUrl: "./public/assets/img/autobus.png",
     iconSize: [32, 32],
@@ -32,7 +32,7 @@ export const MapPage = function () {
 
   const fetchLines = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/lineas");
+      const response = await fetch(`${API_URL}/api/lineas` );
       if (!response.ok) {
         throw new Error("Network response was not ok");
       }
@@ -46,7 +46,7 @@ export const MapPage = function () {
   const fetchStopsAndRoute = async (line) => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/lineas/${line._id}`
+        `${API_URL}/api/lineas/${line._id}`
       );
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -188,7 +188,7 @@ export const MapPage = function () {
     try {
       const token = localStorage.getItem("token");
       await axios.post(
-        "http://localhost:3000/api/favorites",
+        `${API_URL}/api/favorites`,
         { stopName, isFavorite: !favorites[stopName], coordinates },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -200,7 +200,7 @@ export const MapPage = function () {
   const fetchFavorites = async () => {
     try {
       const token = localStorage.getItem("token");
-      const response = await axios.get("http://localhost:3000/api/favorites", {
+      const response = await axios.get(`${API_URL}/api/favorites`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const favoritesData = response.data.reduce((acc, favorite) => {

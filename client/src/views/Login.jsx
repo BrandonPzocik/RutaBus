@@ -34,6 +34,7 @@ export const Login = function Login() {
         // Lógica para registrar usuario
         const data = await registerUser(nombre, email, contrasenia, FecNac);
         console.log("Registro exitoso", data);
+        navigate("/home");
         // Después de registrar, puedes cambiar al formulario de login o iniciar sesión automáticamente
         setIsLogin(true);
       }

@@ -12,14 +12,14 @@ export default function ReclamosPeticiones() {
   const [message, setMessage] = useState({ text: "", type: "" });
   const [usuarioId, setUsuarioId] = useState(); // Estado para el ID del usuario
   const [nombre, setNombre] = useState(""); // Estado para el nombre del usuario
-
+const API_URL = import.meta.env.VITE_API_URL;
   // useEffect para obtener el usuario
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       const getUserData = async () => {
         try {
-          const response = await fetch("http://localhost:3000/validarSesion", {
+          const response = await fetch( `${API_URL}/validarSesion`, {
             method: "GET",
             headers: {
               "Content-Type": "application/json",
@@ -100,7 +100,7 @@ export default function ReclamosPeticiones() {
 
     const token = localStorage.getItem("token"); // Asegúrate de que el token esté almacenado correctamente
     try {
-      const response = await fetch("http://localhost:3000/api/comunicaciones", {
+      const response = await fetch(`${API_URL}/api/comunicaciones`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`, // Agregar el token a las cabeceras
